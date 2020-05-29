@@ -1,0 +1,24 @@
+{
+  "name": "final-project-backend",
+  "version": "1.0.0",
+  "description": "Backend for final project",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:server": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "emailjs": "^2.2.0",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.0.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.13",
+    "mongoose-unique-validator": "^2.0.2",
+    "nodemailer": "^4.7.0",
+    "nodemon": "^1.18.6"
+  }
+}
