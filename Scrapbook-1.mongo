@@ -1,0 +1,14 @@
+db.customers.find()
+db.customers.drop()
+db.users.find()
+db.users.drop()
+db.doctors.find()
+db.doctors.drop()
+
+db.customers.updateOne({customerID:"5bff875a2e1c3a0530df8e6f"},{
+$set: 
+{
+    firstname:"Rahul"
+}
+}
+)
