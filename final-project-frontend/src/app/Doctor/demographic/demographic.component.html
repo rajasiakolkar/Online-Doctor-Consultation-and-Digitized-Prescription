@@ -1,0 +1,62 @@
+
+<div class="contain">
+  <form #demoForm="ngForm" (ngSubmit)="onSubmit(demoForm)" enctype="multipart/form-data" >
+    <mat-grid-list cols="2" rowHeight="80px">
+        <mat-grid-tile>
+            <label class="main head"> Demographic Details </label>
+        </mat-grid-tile>
+        
+        <mat-grid-tile [rowspan]="6"> 
+            <img src={{imageToShow}} alt="pic" class="img">
+            <input  name="pic" (change)="onchange($event)"
+            type="file"  accept="image/*">
+        <input type="hidden" name="image" #image="ngModel" [(ngModel)]="doctorService.selecteddoctor.image">
+      </mat-grid-tile>
+
+      <mat-grid-tile >
+          <mat-form-field class="example-container"> 
+          <input type="text" matInput class="validate" id="first_name" required placeholder="firstname"
+          name="firstname" #firstname="ngModel"  [(ngModel)]="doctorService.selecteddoctor.firstname" />
+          </mat-form-field>
+      </mat-grid-tile>
+        
+        <mat-grid-tile >
+            <mat-form-field class="example-container">
+             <input type="text" matInput class="validate" id="last_name" required placeholder="lastname"
+             name="lastname" #lastname="ngModel"  [(ngModel)]="doctorService.selecteddoctor.lastname" />
+            </mat-form-field>
+        </mat-grid-tile>
+
+    <mat-grid-tile >
+        <mat-form-field class="example-container"> 
+              <mat-select  required
+              placeholder="Speciality"
+              name="speciality" #speciality="ngModel"  [(ngModel)]="doctorService.selecteddoctor.speciality"
+              >
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+      
+          <mat-grid-tile >
+          <mat-radio-group required class="example-container"
+          name="gender" #gender="ngModel" 
+          [(ngModel)]="doctorService.selecteddoctor.gender" 
+          >
+              <mat-radio-button class ="male" value="male">Male </mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button> 
+            </mat-radio-group>
+          </mat-grid-tile>
+        
+
+          <mat-grid-tile class="example-container">
+           <button mat-flat-button color="primary" class="btn btn-custom right" type="submit" [disabled]="!demoForm.valid"> Submit</button>
+          </mat-grid-tile>
+           
+      </mat-grid-list>
+
+  
+  </form>
+</div>

@@ -1,0 +1,86 @@
+<div class="contain">
+  <form #eduForm="ngForm" (ngSubmit)="onSubmit(eduForm)">
+    <mat-grid-list cols="2" rowHeight="80px">
+        <mat-grid-tile>
+            <label class="main head"> Education Details </label>
+        </mat-grid-tile>
+        <mat-grid-tile [rowspan]="6">
+            <img src="assets/images/doctor3.jpg" alt="doctor image" width="500" height="400">
+        </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="example-container">
+          <mat-select
+            required
+            placeholder="Degree"
+            name="degree"
+            #degree="ngModel"
+            [(ngModel)]="doctorService.selecteddoctor.degree"
+          >
+            <mat-option *ngFor="let degree of degrees" [value]="degree.value">
+              {{ degree.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      
+      <mat-grid-tile>
+        <mat-form-field class="example-container">
+          <input
+            matInput
+            required
+            id="College"
+            placeholder="college"
+            name="college"
+            #college="ngModel"
+            [(ngModel)]="doctorService.selecteddoctor.college"
+            type="text"
+            class="validate"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-container">
+          <input
+            matInput
+            required
+            id="EOC"
+            placeholder="Year of complete"
+            name="eoc"
+            #eoc="ngModel"
+            [(ngModel)]="doctorService.selecteddoctor.eoc"
+            type="number"
+            class="validate"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field class="example-container">
+          <input
+            matInput
+            required
+            id="EOY"
+            placeholder="Year of experience"
+            name="eoy"
+            #eoy="ngModel"
+            [(ngModel)]="doctorService.selecteddoctor.eoy"
+            type="number"
+            class="validate"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile class="example-container">
+        <button mat-flat-button color="primary"
+          class="btn btn-custom right"
+          type="submit"
+          [disabled]="!eduForm.valid"
+        >
+          Submit
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>

@@ -1,0 +1,28 @@
+<div class="main">
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1> -->
+<div mat-dialog-content>
+  <div class="header">
+      <b>Clinic Name:  {{doctorService.selecteddoctor.clinicname}}</b><br>
+      <b>Doctor Name:  {{doctorService.selecteddoctor.firstname}}
+          {{doctorService.selecteddoctor.lastname}}
+      </b><br>
+      <span>Adress  :  {{doctorService.selecteddoctor.clinicaddress}}</span> <br>
+      <span>Contact :  {{doctorService.selecteddoctor.phonenumber}}</span>
+  </div><br>
+
+  <div class="patient">
+      <span class="left">Patient Name  :  {{customer.customer.firstname}}  {{customer.customer.lastname}}</span> <span class="right">Patient DOB: {{customer.customer.dob}}</span> <br>
+      <span class="left">Patient Gender:  {{customer.customer.gender}}</span> <span class="right">Date : {{today | date}}</span> 
+  </div><br><br>
+  
+  <div >
+    <textarea name="pres" #pres="ngModel" [(ngModel)]="app.prescription"> </textarea>
+  </div> 
+  
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial (click)="updateapp()">Make</button>
+  
+</div>
+</div>

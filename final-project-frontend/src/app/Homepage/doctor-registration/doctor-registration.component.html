@@ -1,0 +1,64 @@
+<mat-grid-list cols="2" rowHeight="1:1">
+  <mat-grid-tile>
+    <img src="assets/images/doctorsideimage.jpg" alt="doctor image" width="500" height="500">
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Doctor Registration</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <mat-card-content>
+        <div class="modalClass" *ngIf="isSuccess">
+          <p><span class="closeButton" (click)="closeMessage()">X</span><br>Your account has been created. <a
+              [routerLink]="[ '/logincreate' ]" routerLinkActive="active" mat-button>
+              Click Here
+            </a> to proceed further.</p>
+        </div>
+        <a [routerLink]="[ '/logincreate' ]" routerLinkActive="active" mat-button color="primary">
+          Are you Customer? Click here to proceed
+        </a>
+        <form class="example-form" *ngIf="!isLoading" (submit)="onCreate(createForm)" #createForm="ngForm">
+
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="First Name" ngModel required type="text" #firstNameCreate="ngModel" name="firstName">
+            <mat-error *ngIf="firstNameCreate.invalid">
+              First Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Last Name" ngModel required type="text" #lastNameCreate="ngModel" name="lastName">
+            <mat-error *ngIf="lastNameCreate.invalid">
+              First Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" required name="email" ngModel email #emailCreate="ngModel">
+            <mat-error *ngIf="emailCreate.invalid">
+              Please enter a valid email address
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" ngModel required type="password" #createPassword="ngModel" name="password">
+            <mat-error *ngIf="createPassword.invalid">
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <span matPrefix>+1 &nbsp;</span>
+            <input type="tel" matInput placeholder="Telephone" ngModel required #createTel="ngModel" name="createTel">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+            <mat-error *ngIf="createTel.invalid">
+              Telephone is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit">Create</button>
+            <button mat-raised-button color="warn" type="reset" (click)="resetCreateForm(createForm)">Reset</button>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>

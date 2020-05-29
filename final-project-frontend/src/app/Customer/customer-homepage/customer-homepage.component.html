@@ -1,0 +1,93 @@
+<mat-card class="searchBox">
+  <form >
+    <mat-grid-list cols="12" rowHeight="30px">
+      <mat-grid-tile colspan="10">
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="Select Specialization" [(ngModel)]="searchData" aria-label="Assignee"
+            matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </mat-grid-tile>
+      
+      <mat-grid-tile [colspan]="2" class="example-full-width">
+        <button mat-raised-button color="primary" (click)="getDoctorSearch()">Search</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</mat-card>
+
+<mat-card class="doctorData" *ngFor="let doctor of data.doctors">
+  <mat-grid-list cols="12" rowHeight="150px">
+    <mat-grid-tile colspan="2">
+      <img src="assets/images/10.png" alt="Photo of a Shiba Inu">
+    </mat-grid-tile>
+    <mat-grid-tile colspan="5">
+        <mat-list role="list">
+            <mat-list-item role="listitem" class="list1"> {{doctor.firstname}} {{doctor.lastname}}</mat-list-item>
+            <mat-list-item role="listitem" class="list1"> {{doctor.degree}},{{doctor.college}}</mat-list-item>
+            <mat-list-item role="listitem" class="list1"> {{doctor.eoy}} years of experience</mat-list-item>
+            <mat-list-item role="listitem" class="list1"> {{doctor.speciality}}</mat-list-item>
+            </mat-list>  
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2"></mat-grid-tile>
+    <mat-grid-tile colspan="3">
+      <mat-list>
+        <mat-list-item> {{doctor.clinicname}} </mat-list-item>
+        <mat-list-item>  {{doctor.clinicaddress}} </mat-list-item>
+        <mat-list-item> {{doctor.cliniccity}} </mat-list-item>
+        <mat-list-item> {{doctor.fees}} </mat-list-item>
+        <!-- <mat-list-item><button mat-raised-button color="accent">View Appointment</button></mat-list-item>
+        <mat-list-item><button mat-raised-button color="primary">Book Appointment</button></mat-list-item>
+       -->
+      </mat-list>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-tab-group>
+    
+    <mat-tab [label]="currentDate | date: 'fullDate'">
+      <mat-chip-list *ngFor="let time of timing" class="chip"> 
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,stoday,doctor.firstname)" selected *ngIf="(time.no>=doctor.timing.mon.from && currentDay==1  && doctor.timing.mon.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,stoday,doctor.firstname)" selected *ngIf="(time.no>=doctor.timing.tue.from && currentDay==2  && doctor.timing.tue.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,stoday,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.wed.from && currentDay==3  && doctor.timing.wed.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,stoday,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.thu.from && currentDay==4  && doctor.timing.thu.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,stoday,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.fri.from && currentDay==5  && doctor.timing.fri.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,stoday,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.sat.from && currentDay==6  && doctor.timing.sat.to>=time.no) ">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,stoday,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.sun.from && currentDay==0  && doctor.timing.sun.to>=time.no )">{{time.value}}</mat-chip>
+        <!-- <mat-chip color="primary" selected *ngIf="(time.no>=currenttime.from && currenttime.from!=0 && currenttime.to>=time.no)">{{time.value}}</mat-chip> -->
+      </mat-chip-list>
+    </mat-tab>
+    <mat-tab [label]="secondDate | date: 'fullDate'">
+        <mat-chip-list *ngFor="let time of timing" class="chip" > 
+          <mat-chip  color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,ssecond,doctor.firstname)" selected *ngIf="(time.no>=doctor.timing.mon.from && secondDay==1  && doctor.timing.mon.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary"  (click)="openDialog(doctor.doctorID,time.no,time.value,ssecond,doctor.firstname)"  selected *ngIf="(time.no>=doctor.timing.tue.from && secondDay==2  && doctor.timing.tue.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,ssecond,doctor.firstname)" selected *ngIf="(time.no>=doctor.timing.wed.from && secondDay==3  && doctor.timing.wed.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,ssecond,doctor.firstname)" selected *ngIf="(time.no>=doctor.timing.thu.from && secondDay==4  && doctor.timing.thu.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,ssecond,doctor.firstname)" selected *ngIf="(time.no>=doctor.timing.fri.from && secondDay==5  && doctor.timing.fri.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,ssecond,doctor.firstname)" selected *ngIf="(time.no>=doctor.timing.sat.from && secondDay==6  && doctor.timing.sat.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,ssecond,doctor.firstname)" selected *ngIf="(time.no>=doctor.timing.sun.from && secondDay==0  && doctor.timing.sun.to>=time.no)">{{time.value}}</mat-chip>
+           
+          <!-- <mat-chip color="primary" selected *ngIf="(time.no>=secondtime.from && secondtime.from!=0 && secondtime.to>=time.no)">{{time.value}}</mat-chip>
+          -->
+        </mat-chip-list>
+    </mat-tab>
+    <mat-tab [label]="thirdDate | date: 'fullDate'">
+        <mat-chip-list *ngFor="let time of timing" class="chip"> 
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,sthird,doctor.firstname)" selected *ngIf="(time.no>=doctor.timing.mon.from && thirdDay==1  && doctor.timing.mon.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary"  (click)="openDialog(doctor.doctorID,time.no,time.value,sthird,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.tue.from && thirdDay==2  && doctor.timing.tue.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,sthird,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.wed.from && thirdDay==3  && doctor.timing.wed.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,sthird,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.thu.from && thirdDay==4  && doctor.timing.thu.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,sthird,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.fri.from && thirdDay==5  && doctor.timing.fri.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,sthird,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.sat.from && thirdDay==6  && doctor.timing.sat.to>=time.no)">{{time.value}}</mat-chip>
+          <mat-chip color="primary" (click)="openDialog(doctor.doctorID,time.no,time.value,sthird,doctor.firstname)"selected *ngIf="(time.no>=doctor.timing.sun.from && thirdDay==0  && doctor.timing.sun.to>=time.no)">{{time.value}}</mat-chip>
+          <!-- <mat-chip color="primary" selected *ngIf="(time.no>=thirdtime.from && thirdtime.from!=0 && thirdtime.to>=time.no)">{{time.value}}</mat-chip>
+           -->
+          </mat-chip-list>
+    </mat-tab>
+     
+    
+  </mat-tab-group>
+</mat-card>

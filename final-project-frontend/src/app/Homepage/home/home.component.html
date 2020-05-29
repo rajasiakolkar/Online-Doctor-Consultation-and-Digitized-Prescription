@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Final Project</span>
+    <span class="example-fill-remaining-space"></span>
+    <span class="align-center"></span>
+    <span class="example-spacer"></span>
+    <a [routerLink]="[ '/logincreate' ]" routerLinkActive="active" mat-button *ngIf="!userisAuthenticated && !doctorisAuthenticated">
+      <mat-icon>account_box</mat-icon> Log In/Create Account
+    </a>
+    <a [routerLink]="[ '/customerHomepage']" routerLinkActive="active" mat-button *ngIf="userisAuthenticated && !doctorisAuthenticated">
+     <mat-icon>home</mat-icon> Home
+    </a>
+    <a [routerLink]="[ '/customerAppointments']" routerLinkActive="active" mat-button *ngIf="userisAuthenticated && !doctorisAuthenticated">
+      <mat-icon>event</mat-icon>View Appointments
+    </a>
+    <a [routerLink]="[ '/doctorHome']" routerLinkActive="active" mat-button *ngIf="!userisAuthenticated && doctorisAuthenticated">
+      <mat-icon>home</mat-icon> Home
+    </a>
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="userisAuthenticated || doctorisAuthenticated">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item  *ngIf="userisAuthenticated && !doctorisAuthenticated">
+        <a [routerLink]="[ '/customerProfile']" routerLinkActive="active" class="anchorStyles">
+          <mat-icon>info</mat-icon> Profile
+        </a>
+      </button>
+      <button mat-menu-item *ngIf="!userisAuthenticated && doctorisAuthenticated" class="anchorStyles">
+        <a [routerLink]="[ '/doctorprofile']" routerLinkActive="active">
+         <mat-icon>info</mat-icon> Profile
+        </a>
+      </button>
+      <button mat-menu-item *ngIf="!userisAuthenticated && doctorisAuthenticated">
+        <a [routerLink]="[ '/doctorclinic']" routerLinkActive="active">
+          <mat-icon> local_hospital</mat-icon> Clinic
+        </a>
+      </button>
+      <button mat-menu-item *ngIf="!userisAuthenticated && doctorisAuthenticated">
+        <a [routerLink]="[ '/doctorEducation']" routerLinkActive="active">
+          <mat-icon>school</mat-icon> Education
+        </a>
+      </button>
+      <button mat-menu-item *ngIf="userisAuthenticated || doctorisAuthenticated" >
+        <a (click)="onLogout()">
+         <mat-icon>exit_to_app</mat-icon> LogOut
+        </a>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>

@@ -1,0 +1,24 @@
+.example-full-width {
+  width: 100%;
+}
+.example-radio-group {
+  display: inline-block;
+  flex-direction: column;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.example-selected-value {
+  margin: 15px 0;
+}
+
+.firstPage,.secondPage{
+  margin-top:10px;
+}
+.example-form {
+  min-width: 500px;
+  max-width: 500px;
+  width: 100%;
+}

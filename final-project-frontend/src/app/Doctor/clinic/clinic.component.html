@@ -1,0 +1,59 @@
+
+<div class="contain">
+  <form  #clinicForm="ngForm" (ngSubmit)="onSubmit(clinicForm)">
+      
+      <mat-grid-list cols="2" rowHeight="80px">
+          <mat-grid-tile>
+              <label class="main head"> Clinic Details </label>
+          </mat-grid-tile>
+          
+
+        <mat-grid-tile [rowspan]="6">
+                <img src="assets/images/doctor1.jpg" alt="doctor image" width="500" height="500">
+        </mat-grid-tile>
+        <mat-grid-tile  >
+            <mat-form-field class="main">
+      <input  matInput required id="clinic" placeholder="clinic"
+      name="clinicname" #clinicname="ngModel"  [(ngModel)]="doctorService.selecteddoctor.clinicname"
+       type="text" class="validate"/>
+      
+      </mat-form-field>
+      </mat-grid-tile>
+   
+        
+        <mat-grid-tile >
+          <mat-form-field class="main">
+              <mat-select  required 
+              placeholder="City"
+              name="cliniccity" #cliniccity="ngModel"  [(ngModel)]="doctorService.selecteddoctor.cliniccity"
+              >
+                <mat-option *ngFor="let city of cities" [value]="city.value">
+                  {{city.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> 
+          </mat-grid-tile>
+
+          <mat-grid-tile >
+              <mat-form-field class="main">
+        <input  matInput required id="clinicaddress" placeholder="clinic address"
+        name="clinicaddress" #clinicaddress="ngModel"  [(ngModel)]="doctorService.selecteddoctor.clinicaddress"
+         type="text" class="validate"/>
+         </mat-form-field>
+        </mat-grid-tile>
+
+         <mat-grid-tile >
+              <mat-form-field class="main">
+                   <input  matInput required id="fees" placeholder="fees"
+                    name="fees" #fees="ngModel" [(ngModel)]="doctorService.selecteddoctor.fees" type="number" class="validate"/>
+              </mat-form-field>   
+        </mat-grid-tile>
+        
+      <mat-grid-tile >
+        <button mat-flat-button color="primary" class="btn btn-custom right" type="submit" [disabled]="!clinicForm.valid"> Submit</button>
+      </mat-grid-tile>
+      
+        </mat-grid-list>
+      
+  </form>
+</div>

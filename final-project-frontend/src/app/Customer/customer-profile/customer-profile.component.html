@@ -1,0 +1,80 @@
+<mat-horizontal-stepper [linear]="isLinear"  #stepper>
+  <mat-step>
+    <form class="example-form">
+      <ng-template matStepLabel>Basic Details</ng-template>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="First name" name="createTel" [(ngModel)]="customerData$.firstname" type="text" name="firstname">
+      </mat-form-field>
+      <ng-template matStepLabel>Last Name</ng-template>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Last name" [(ngModel)]="customerData$.lastname" name="lastname" type="text">
+      </mat-form-field>
+      <ng-template matStepLabel>Email ID</ng-template>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email ID" [(ngModel)]="customerData$.email" name="email" type="email" email>
+      </mat-form-field>
+      <ng-template matStepLabel>Phone Number</ng-template>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Phone" [(ngModel)]="customerData$.phonenumber" name="phonenumber" type="tel">
+      </mat-form-field>
+      <div class="firstPage">
+        <button mat-raised-button color="accent" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <form  class="example-form">
+      <ng-template matStepLabel>Personal Details</ng-template>
+      <label for="example-radio-group">Gender: </label>
+      <mat-radio-group class="example-radio-group" [(ngModel)]="customerData$.gender" name="gender">
+        <mat-radio-button value="male" class="example-radio-button" name="gender">Male</mat-radio-button>
+        <mat-radio-button value="female" class="example-radio-button" name="gender">Female</mat-radio-button>
+        <mat-radio-button value="other" class="example-radio-button" name="gender">Other</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Address" required [(ngModel)]="customerData$.address" name="address"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Date of Birth" type="date" required [(ngModel)]="customerData$.dob" name="dob">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Blood Group" type="text" required [(ngModel)]="customerData$.bloodGroup" name="bloodgroup">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Family Medical History of Diabetes, Blood Pressure, Cancer, etc." type="text" required [(ngModel)]="customerData$.fmh" name="fmh"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input type="text" matInput placeholder="Immediate Family(Mother, Father, Wife, etc.)" type="text" required [(ngModel)]="customerData$.ifm" name="ifm">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Marital Status" [(ngModel)]="customerData$.maritalStatus" name="maritalstatus">
+          <mat-option *ngFor="let item of maritalStatus" [value]="item.value" >
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field><br>
+      <label for="example-radio-group">Would you like to be a blood donor? </label>
+      <mat-radio-group class="example-radio-group" [(ngModel)]="customerData$.voluntary" name="voluntary">
+        <mat-radio-button value="yes" class="example-radio-button" name="answer">Yes</mat-radio-button>
+        <mat-radio-button value="no" class="example-radio-button" name="answer">No</mat-radio-button>
+      </mat-radio-group>
+      <div class="secondPage">
+        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+        <button mat-raised-button color="accent" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    Do you wish to submit the details?.
+    <div>
+      <button mat-raised-button color="primary" type="submit" (click)="finalFormSubmit(stepper)">Submit</button>
+      <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

@@ -1,0 +1,22 @@
+
+<p id="lati"></p>
+<p id="long"></p>
+<div class="contain">
+<mat-grid-list  cols="2"  rowHeight="100px">
+    <mat-grid-tile >
+        <button mat-flat-button color="primary" class="btn btn-custom right" (click)="get()"> Set Current Location</button>
+    </mat-grid-tile>
+    <mat-grid-tile [rowspan]="5">
+            <img src="assets/images/doctor4.jpg" alt="doctor image" width="500" height="400">
+    </mat-grid-tile>
+    <mat-grid-tile [rowspan]="4" >
+      <div class="map">
+        <agm-map  [latitude]="doctorService.selecteddoctor.location.latitude" [longitude]="doctorService.selecteddoctor.location.longitude">
+            <agm-marker [latitude]="doctorService.selecteddoctor.location.latitude" [longitude]="doctorService.selecteddoctor.location.longitude"></agm-marker>
+        </agm-map>
+      </div>
+    </mat-grid-tile>
+   
+</mat-grid-list>
+
+</div>
